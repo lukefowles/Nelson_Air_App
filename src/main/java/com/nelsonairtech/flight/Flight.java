@@ -3,64 +3,34 @@ package com.nelsonairtech.flight;
 import com.nelsonairtech.customer.Customer;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Flight {
     private LocalDate timeOfFlight;
     private int FlightNum;
-    private FlightStatus flightStatus;
-    private Location origin;
-    private Location destination;
-    private PlaneModelType planeModelType;
+    private String flightStatus;
+    private String origin;
+    private String destination;
+    private String planeModelType;
     private int Capacity;
-    private Customer[] customers;
+    private ArrayList<String> customers;
     private int count;
     private Boolean isFullyBooked;
 
-    public Flight(LocalDate timeOfFlight, int flightNum, Location origin, Location destination, PlaneModelType planeModelType, int capacity, int count) {
+    public Flight(LocalDate timeOfFlight, int flightNum, String flightStatus, String origin, String destination, String planeModelType, int capacity, int count) {
         this.timeOfFlight = timeOfFlight;
-        this.FlightNum = flightNum;
-        this.flightStatus = FlightStatus.ONTIME;
+        FlightNum = flightNum;
+        this.flightStatus = flightStatus;
         this.origin = origin;
         this.destination = destination;
         this.planeModelType = planeModelType;
-        this.Capacity = capacity;
-        this.customers = new Customer[capacity];
+        Capacity = capacity;
+        this.customers = new ArrayList<String>();
         this.count = count;
         this.isFullyBooked = false;
-    }
-
-    public Boolean getFullyBooked() {
-        return isFullyBooked;
-    }
-
-    public void setFullyBooked(Boolean fullyBooked) {
-        isFullyBooked = fullyBooked;
-    }
-
-    public Location getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(Location origin) {
-        this.origin = origin;
-    }
-
-    public Location getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Location destination) {
-        this.destination = destination;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public LocalDate getTimeOfFlight() {
@@ -79,19 +49,35 @@ public class Flight {
         FlightNum = flightNum;
     }
 
-    public FlightStatus getFlightStatus() {
+    public String getFlightStatus() {
         return flightStatus;
     }
 
-    public void setFlightStatus(FlightStatus flightStatus) {
+    public void setFlightStatus(String flightStatus) {
         this.flightStatus = flightStatus;
     }
 
-    public PlaneModelType getPlaneModelType() {
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getPlaneModelType() {
         return planeModelType;
     }
 
-    public void setPlaneModelType(PlaneModelType planeModelType) {
+    public void setPlaneModelType(String planeModelType) {
         this.planeModelType = planeModelType;
     }
 
@@ -103,12 +89,28 @@ public class Flight {
         Capacity = capacity;
     }
 
-    public Customer[] getCustomers() {
+    public ArrayList<String> getCustomers() {
         return customers;
     }
 
-    public void setCustomers(Customer[] customers) {
+    public void setCustomers(ArrayList<String> customers) {
         this.customers = customers;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public Boolean getFullyBooked() {
+        return isFullyBooked;
+    }
+
+    public void setFullyBooked(Boolean fullyBooked) {
+        isFullyBooked = fullyBooked;
     }
 
     @Override
@@ -116,26 +118,27 @@ public class Flight {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Flight flight = (Flight) o;
-        return FlightNum == flight.FlightNum && Capacity == flight.Capacity && count == flight.count && Objects.equals(timeOfFlight, flight.timeOfFlight) && flightStatus == flight.flightStatus && origin == flight.origin && destination == flight.destination && planeModelType == flight.planeModelType && Arrays.equals(customers, flight.customers) && Objects.equals(isFullyBooked, flight.isFullyBooked);
+        return FlightNum == flight.FlightNum && Capacity == flight.Capacity && count == flight.count && Objects.equals(timeOfFlight, flight.timeOfFlight) && Objects.equals(flightStatus, flight.flightStatus) && Objects.equals(origin, flight.origin) && Objects.equals(destination, flight.destination) && Objects.equals(planeModelType, flight.planeModelType) && Objects.equals(customers, flight.customers) && Objects.equals(isFullyBooked, flight.isFullyBooked);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(timeOfFlight, FlightNum, flightStatus, origin, destination, planeModelType, Capacity, count, isFullyBooked);
-        result = 31 * result + Arrays.hashCode(customers);
-        return result;
+        return Objects.hash(timeOfFlight, FlightNum, flightStatus, origin, destination, planeModelType, Capacity, customers, count, isFullyBooked);
     }
 
     @Override
     public String toString() {
         return "Flight{" +
-                "timeOfFlight: " + timeOfFlight +
-                ", FlightNum: " + FlightNum +
-                ", flightStatus: " + flightStatus +
-                ", origin: " + origin +
-                ", destination: " + destination +
-                ", planeModelType: " + planeModelType +
-                ", Capacity: " + Capacity +
+                "timeOfFlight=" + timeOfFlight +
+                ", FlightNum=" + FlightNum +
+                ", flightStatus='" + flightStatus + '\'' +
+                ", origin='" + origin + '\'' +
+                ", destination='" + destination + '\'' +
+                ", planeModelType='" + planeModelType + '\'' +
+                ", Capacity=" + Capacity +
+                ", customers=" + customers +
+                ", count=" + count +
+                ", isFullyBooked=" + isFullyBooked +
                 '}';
     }
 }

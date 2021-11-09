@@ -1,7 +1,5 @@
 package com.nelsonairtech.ticket;
 
-import com.nelsonairtech.flight.Location;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,20 +8,10 @@ public class Ticket {
     private String passportNumber;
 
     private int ticketNumber;
-    private LocalDate timeOfFlight;
+    private String timeOfFlight;
     private int flightNumber;
-    private Location origin;
-    private Location destination;
-
-    public Ticket(String name, String passportNumber, int ticketNumber, LocalDate timeOfFlight, int flightNumber, Location origin, Location destination) {
-        this.name = name;
-        this.passportNumber = passportNumber;
-        this.ticketNumber = ticketNumber;
-        this.timeOfFlight = timeOfFlight;
-        this.flightNumber = flightNumber;
-        this.origin = origin;
-        this.destination = destination;
-    }
+    private String origin;
+    private String destination;
 
     public String getName() {
         return name;
@@ -33,12 +21,12 @@ public class Ticket {
         this.name = name;
     }
 
-    public String getPassNum() {
+    public String getPassportNumber() {
         return passportNumber;
     }
 
-    public void setPassNum(String passNum) {
-        this.passportNumber = passNum;
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     public int getTicketNumber() {
@@ -49,11 +37,11 @@ public class Ticket {
         this.ticketNumber = ticketNumber;
     }
 
-    public LocalDate getTimeOfFlight() {
+    public String getTimeOfFlight() {
         return timeOfFlight;
     }
 
-    public void setTimeOfFlight(LocalDate timeOfFlight) {
+    public void setTimeOfFlight(String timeOfFlight) {
         this.timeOfFlight = timeOfFlight;
     }
 
@@ -65,20 +53,33 @@ public class Ticket {
         this.flightNumber = flightNumber;
     }
 
-    public Location getOrigin() {
+    public String getOrigin() {
         return origin;
     }
 
-    public void setOrigin(Location origin) {
+    public void setOrigin(String origin) {
         this.origin = origin;
     }
 
-    public Location getDestination() {
+    public String getDestination() {
         return destination;
     }
 
-    public void setDestination(Location destination) {
+    public void setDestination(String destination) {
         this.destination = destination;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return ticketNumber == ticket.ticketNumber && flightNumber == ticket.flightNumber && Objects.equals(name, ticket.name) && Objects.equals(passportNumber, ticket.passportNumber) && Objects.equals(timeOfFlight, ticket.timeOfFlight) && Objects.equals(origin, ticket.origin) && Objects.equals(destination, ticket.destination);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, passportNumber, ticketNumber, timeOfFlight, flightNumber, origin, destination);
     }
 
     @Override
@@ -87,23 +88,10 @@ public class Ticket {
                 "name='" + name + '\'' +
                 ", passportNumber='" + passportNumber + '\'' +
                 ", ticketNumber=" + ticketNumber +
-                ", timeOfFlight=" + timeOfFlight +
+                ", timeOfFlight='" + timeOfFlight + '\'' +
                 ", flightNumber=" + flightNumber +
-                ", origin=" + origin +
-                ", destination=" + destination +
+                ", origin='" + origin + '\'' +
+                ", destination='" + destination + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return ticketNumber == ticket.ticketNumber && flightNumber == ticket.flightNumber && Objects.equals(name, ticket.name) && Objects.equals(passportNumber, ticket.passportNumber) && Objects.equals(timeOfFlight, ticket.timeOfFlight) && origin == ticket.origin && destination == ticket.destination;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, passportNumber, ticketNumber, timeOfFlight, flightNumber, origin, destination);
     }
 }
